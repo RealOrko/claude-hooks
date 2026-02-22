@@ -1,0 +1,5 @@
+{
+  "Version": "1.0.0",
+  "Name": "conversation-memory", 
+  "Description": "For storing and querying claude conversations, they are also searchable via a built-in MCP"
+}

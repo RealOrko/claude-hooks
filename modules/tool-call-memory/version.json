@@ -1,0 +1,5 @@
+{
+  "Version": "1.0.0",
+  "Name": "tool-call-memory", 
+  "Description": "For storing and querying claude tool executions, less failures over time"
+}

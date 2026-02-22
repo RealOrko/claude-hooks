@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'NOT IMPLEMENTED'",
+            "timeout": 30,
+            "statusMessage": "Not implemented"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'NOT IMPLEMENTED'",
+            "timeout": 60,
+            "statusMessage": "Not implemented"
+          }
+        ]
+      }
+    ]
+  }
+}
