@@ -43,7 +43,7 @@
     "tool-call-memory": {
       "type": "stdio",
       "command": "node",
-      "args": ["$CLAUDE_PROJECT_DIR/.claude/claude-hooks/tool-call-memory/mcp-server.js"]
+      "args": [".claude/claude-hooks/tool-call-memory/mcp-server.js"]
     }
   }
 }

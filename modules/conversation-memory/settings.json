@@ -29,7 +29,7 @@
     "conversation-memory": {
       "type": "stdio",
       "command": "node",
-      "args": ["$CLAUDE_PROJECT_DIR/.claude/claude-hooks/conversation-memory/mcp-server.js"]
+      "args": [".claude/claude-hooks/conversation-memory/mcp-server.js"]
     }
   }
 }
