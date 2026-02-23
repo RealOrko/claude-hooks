@@ -56,6 +56,15 @@ export async function deleteByFilePath(filePath) {
   await table.delete(`file_path = '${escaped}'`);
 }
 
+export async function deleteByFilePaths(filePaths) {
+  if (filePaths.length === 0) return;
+  const table = await getTable();
+  const count = await table.countRows();
+  if (count === 0) return;
+  const escaped = filePaths.map(p => `'${p.replace(/'/g, "''")}'`).join(', ');
+  await table.delete(`file_path IN (${escaped})`);
+}
+
 export async function addChunks(records) {
   const table = await getTable();
   const count = await table.countRows();
