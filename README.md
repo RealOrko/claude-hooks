@@ -99,6 +99,20 @@ Records every tool call Claude makes with success/failure scoring, then uses tim
 
 **Tech stack:** [LanceDB](https://lancedb.com/) for vector storage, [Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2) for local embeddings via `@huggingface/transformers`.
 
+### 💻 code-memory
+
+Indexes and searches project source code by file extension using vector embeddings. Unlike the other modules, this is MCP-only — no hooks, just tools you can call directly.
+
+**MCP Tools provided:**
+
+| Tool | Description |
+|------|-------------|
+| 📥 `index_code` | Walk a directory tree matching file patterns (e.g. `*.py`, `*.ts`), chunk each file, and embed into the vector database. Re-indexes files that were previously indexed. |
+| 🔎 `search_code` | Semantic search across indexed source code with optional language and file path filters |
+| 📋 `list_indexed_files` | List all files currently indexed in the code search database |
+
+**Tech stack:** [LanceDB](https://lancedb.com/) for vector storage, [Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2) for local embeddings via `@huggingface/transformers`.
+
 ## 📁 Project Structure
 
 ```
@@ -126,6 +140,14 @@ claude-hooks/
 │   │       ├── db.js            # LanceDB operations
 │   │       ├── embeddings.js    # Local vector embeddings
 │   │       └── transcript.js    # Transcript parsing
+│   ├── code-memory/             # 💻 Source code semantic search
+│   │   ├── mcp-server.js
+│   │   ├── settings.json
+│   │   ├── version.json
+│   │   ├── package.json
+│   │   └── lib/
+│   │       ├── db.js            # LanceDB operations
+│   │       └── embeddings.js    # Local vector embeddings
 │   └── tool-call-memory/        # 🛠️ Tool call pattern tracking
 │       ├── suggest-tool-context.js
 │       ├── record-tool-success.js
