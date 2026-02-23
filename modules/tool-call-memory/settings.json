@@ -5,24 +5,45 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo 'NOT IMPLEMENTED'",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/tool-call-memory/suggest-tool-context.js",
             "timeout": 30,
-            "statusMessage": "Not implemented"
+            "statusMessage": "Checking tool call history"
           }
         ]
       }
     ],
-    "Stop": [
+    "PostToolUse": [
       {
+        "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "echo 'NOT IMPLEMENTED'",
-            "timeout": 60,
-            "statusMessage": "Not implemented"
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/tool-call-memory/record-tool-success.js",
+            "timeout": 30,
+            "statusMessage": "Recording tool call"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/tool-call-memory/record-tool-failure.js",
+            "timeout": 30,
+            "statusMessage": "Recording tool call failure"
           }
         ]
       }
     ]
+  },
+  "mcpServers": {
+    "tool-call-memory": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["$CLAUDE_PROJECT_DIR/.claude/claude-hooks/tool-call-memory/mcp-server.js"]
+    }
   }
 }

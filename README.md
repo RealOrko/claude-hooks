@@ -75,7 +75,29 @@ Gives Claude long-term memory across sessions by indexing conversations into a l
 
 ### 🛠️ tool-call-memory
 
-> 🚧 *Not yet implemented* — planned module for storing and querying Claude's tool executions to reduce repeated failures over time.
+Records every tool call Claude makes with success/failure scoring, then uses time-weighted pattern analysis to warn Claude about historically problematic tool usage before it repeats the same mistakes.
+
+**How it works:**
+
+| Hook | Event | What it does |
+|------|-------|-------------|
+| 💡 `suggest-tool-context.js` | `UserPromptSubmit` | Searches past tool failures relevant to the prompt and surfaces warnings with time-weighted scores |
+| ✅ `record-tool-success.js` | `PostToolUse` | Records successful tool calls with score +10 |
+| ❌ `record-tool-failure.js` | `PostToolUseFailure` | Records failed tool calls with score -10, captures error message and full parameters |
+
+**MCP Tools provided:**
+
+| Tool | Description |
+|------|-------------|
+| 🔎 `search_tool_calls` | Semantic search across past tool executions with success/failure filtering |
+| 📊 `get_tool_stats` | Aggregate success rate and cumulative score per tool |
+| 📄 `get_tool_call_detail` | Retrieve full input parameters and error details for a specific call |
+
+**Time-weighted scoring:** Failures decay with a 30-day half-life — a -10 failure from 30 days ago counts as -5, from 60 days ago as -2.5. As Claude gets tool calls right, the warnings naturally fade away. Only the top 5 most-failed tool patterns are surfaced per prompt.
+
+**What gets recorded per call:** tool name, full input parameters (JSON), success/failure status, score, error message, session ID, timestamp, human-readable summary, and a 384-dim embedding vector for semantic search.
+
+**Tech stack:** [LanceDB](https://lancedb.com/) for vector storage, [Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2) for local embeddings via `@huggingface/transformers`.
 
 ## 📁 Project Structure
 
@@ -104,7 +126,19 @@ claude-hooks/
 │   │       ├── db.js            # LanceDB operations
 │   │       ├── embeddings.js    # Local vector embeddings
 │   │       └── transcript.js    # Transcript parsing
-│   └── tool-call-memory/       # 🛠️ (planned)
+│   └── tool-call-memory/        # 🛠️ Tool call pattern tracking
+│       ├── suggest-tool-context.js
+│       ├── record-tool-success.js
+│       ├── record-tool-failure.js
+│       ├── mcp-server.js
+│       ├── settings.json
+│       ├── version.json
+│       ├── package.json
+│       └── lib/
+│           ├── db.js            # LanceDB operations
+│           ├── embeddings.js    # Local vector embeddings
+│           ├── formatting.js    # Tool input summarization
+│           └── scoring.js       # Time-weighted decay scoring
 └── package.json
 ```
 
