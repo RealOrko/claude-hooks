@@ -1,0 +1,8 @@
+{
+  "name": "coder-c",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "All-in-one C toolkit: expert mode, project scaffolding, and build/debug helpers",
+  "scripts": {},
+  "dependencies": {}
+}
