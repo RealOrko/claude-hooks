@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/tool-call-memory/suggest-tool-context.js",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/memory-tool-call/suggest-tool-context.js",
             "timeout": 30,
             "statusMessage": "Checking tool call history"
           }
@@ -18,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/tool-call-memory/record-tool-success.js",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/memory-tool-call/record-tool-success.js",
             "timeout": 30,
             "statusMessage": "Recording tool call"
           }
@@ -31,7 +31,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/tool-call-memory/record-tool-failure.js",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/memory-tool-call/record-tool-failure.js",
             "timeout": 30,
             "statusMessage": "Recording tool call failure"
           }
@@ -40,10 +40,10 @@
     ]
   },
   "mcpServers": {
-    "tool-call-memory": {
+    "memory-tool-call": {
       "type": "stdio",
       "command": "node",
-      "args": [".claude/claude-hooks/tool-call-memory/mcp-server.js"]
+      "args": [".claude/claude-hooks/memory-tool-call/mcp-server.js"]
     }
   }
 }

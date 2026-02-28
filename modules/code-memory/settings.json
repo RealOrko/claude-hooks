@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "code-memory": {
-      "type": "stdio",
-      "command": "node",
-      "args": [".claude/claude-hooks/code-memory/mcp-server.js"]
-    }
-  }
-}

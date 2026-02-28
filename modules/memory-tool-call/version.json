@@ -1,5 +1,5 @@
 {
   "Version": "1.0.0",
-  "Name": "tool-call-memory",
+  "Name": "memory-tool-call",
   "Description": "Records tool call executions with success/failure scoring for pattern analysis"
 }

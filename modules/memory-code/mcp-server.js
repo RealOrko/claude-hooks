@@ -150,7 +150,7 @@ async function mapWithConcurrency(items, concurrency, fn) {
 // --- MCP Server ---
 
 const server = new McpServer({
-  name: 'code-memory',
+  name: 'memory-code',
   version: '1.0.0',
 });
 
@@ -469,7 +469,7 @@ async function runCli() {
   }
 
   if (args[0] === '--help' || args[0] === '-h') {
-    console.log(`code-memory — semantic code search
+    console.log(`memory-code — semantic code search
 
 Commands:
   --index <dir> <pattern> [pattern...]   Index source files
@@ -495,5 +495,5 @@ if (process.argv.length > 2) {
 } else {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('code-memory MCP server running on stdio');
+  console.error('memory-code MCP server running on stdio');
 }

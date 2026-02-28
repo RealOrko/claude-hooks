@@ -5,7 +5,7 @@ import { embed } from './lib/embeddings.js';
 import { search, getById, getCount, queryByToolName } from './lib/db.js';
 
 const server = new McpServer({
-  name: 'tool-call-memory',
+  name: 'memory-tool-call',
   version: '1.0.0',
 });
 
@@ -143,4 +143,4 @@ server.tool(
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
-console.error('tool-call-memory MCP server running on stdio');
+console.error('memory-tool-call MCP server running on stdio');

@@ -1,5 +1,5 @@
 {
   "Version": "1.0.0",
-  "Name": "code-memory",
+  "Name": "memory-code",
   "Description": "Indexes and searches project source code by file extension using vector embeddings"
 }

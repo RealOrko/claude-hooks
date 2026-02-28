@@ -5,7 +5,7 @@ import { embed } from './lib/embeddings.js';
 import { search, getById, getCount } from './lib/db.js';
 
 const server = new McpServer({
-  name: 'conversation-memory',
+  name: 'memory-conversation',
   version: '1.0.0',
 });
 
@@ -113,4 +113,4 @@ server.tool(
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
-console.error('conversation-memory MCP server running on stdio');
+console.error('memory-conversation MCP server running on stdio');

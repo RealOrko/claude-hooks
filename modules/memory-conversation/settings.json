@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/conversation-memory/suggest-context.js",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/memory-conversation/suggest-context.js",
             "timeout": 60,
             "statusMessage": "Searching conversation memory"
           }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/conversation-memory/index-conversation.js",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/memory-conversation/index-conversation.js",
             "timeout": 60,
             "statusMessage": "Indexing conversation to memory"
           }
@@ -26,10 +26,10 @@
     ]
   },
   "mcpServers": {
-    "conversation-memory": {
+    "memory-conversation": {
       "type": "stdio",
       "command": "node",
-      "args": [".claude/claude-hooks/conversation-memory/mcp-server.js"]
+      "args": [".claude/claude-hooks/memory-conversation/mcp-server.js"]
     }
   }
 }

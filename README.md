@@ -32,7 +32,7 @@ chx --list
 
 # Navigate to your project and install a module
 cd /path/to/your/project
-chx --install conversation-memory
+chx --install memory-conversation
 
 # Restart Claude Code — hooks are now active! 🎉
 ```
@@ -65,7 +65,7 @@ Options:
 
 ## 🧩 Available Modules
 
-### 🧠 conversation-memory
+### 🧠 memory-conversation
 
 Gives Claude long-term memory across sessions by indexing conversations into a local vector database.
 
@@ -86,7 +86,7 @@ Gives Claude long-term memory across sessions by indexing conversations into a l
 
 **Tech stack:** [LanceDB](https://lancedb.com/) for vector storage, [Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2) for local embeddings via `@huggingface/transformers`.
 
-### 🛠️ tool-call-memory
+### 🛠️ memory-tool-call
 
 Records every tool call Claude makes with success/failure scoring, then uses time-weighted pattern analysis to warn Claude about historically problematic tool usage before it repeats the same mistakes.
 
@@ -112,7 +112,7 @@ Records every tool call Claude makes with success/failure scoring, then uses tim
 
 **Tech stack:** [LanceDB](https://lancedb.com/) for vector storage, [Xenova/all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2) for local embeddings via `@huggingface/transformers`.
 
-### 💻 code-memory
+### 💻 memory-code
 
 Indexes and searches project source code by file extension using vector embeddings. Unlike the other modules, this is MCP-only — no hooks, just tools you can call directly.
 
@@ -146,7 +146,7 @@ claude-hooks/
 │       ├── run.js               # --run implementation
 │       └── teams.js             # --teams / --no-teams implementation
 ├── modules/
-│   ├── conversation-memory/     # 🧠 Long-term conversation memory
+│   ├── memory-conversation/     # 🧠 Long-term conversation memory
 │   │   ├── index-conversation.js
 │   │   ├── suggest-context.js
 │   │   ├── mcp-server.js
@@ -157,7 +157,7 @@ claude-hooks/
 │   │       ├── db.js            # LanceDB operations
 │   │       ├── embeddings.js    # Local vector embeddings
 │   │       └── transcript.js    # Transcript parsing
-│   ├── code-memory/             # 💻 Source code semantic search
+│   ├── memory-code/             # 💻 Source code semantic search
 │   │   ├── mcp-server.js
 │   │   ├── settings.json
 │   │   ├── version.json
@@ -165,7 +165,7 @@ claude-hooks/
 │   │   └── lib/
 │   │       ├── db.js            # LanceDB operations
 │   │       └── embeddings.js    # Local vector embeddings
-│   └── tool-call-memory/        # 🛠️ Tool call pattern tracking
+│   └── memory-tool-call/        # 🛠️ Tool call pattern tracking
 │       ├── suggest-tool-context.js
 │       ├── record-tool-success.js
 │       ├── record-tool-failure.js
