@@ -10,6 +10,7 @@ A CLI tool for managing [Claude Code](https://docs.anthropic.com/en/docs/claude-
 - 🔄 **Self-updating** — `chx --update` pulls the latest from git
 - 🔀 **Model redirect** — `chx --redirect` points Claude Code at a different endpoint via `.env` (with `.gitignore` protection)
 - 🚀 **Quick launch** — `chx --run` loads `.env` and starts Claude Code with `--dangerously-skip-permissions`
+- 👥 **Agent teams** — `chx --teams` enables experimental multi-agent support via `.env`
 
 ## 📋 Requirements
 
@@ -56,6 +57,8 @@ Options:
       --model <model>           Model name (default: redirected-model)
   --reset                     Remove redirect variables from .env
   --run                       Load .env and start Claude Code (--dangerously-skip-permissions)
+  --teams                     Enable experimental agent teams in .env
+  --no-teams                  Disable experimental agent teams from .env
 ```
 
 ## 🧩 Available Modules
@@ -138,7 +141,8 @@ claude-hooks/
 │       ├── update.js            # --update implementation
 │       ├── redirect.js          # --redirect implementation
 │       ├── reset.js             # --reset implementation
-│       └── run.js               # --run implementation
+│       ├── run.js               # --run implementation
+│       └── teams.js             # --teams / --no-teams implementation
 ├── modules/
 │   ├── conversation-memory/     # 🧠 Long-term conversation memory
 │   │   ├── index-conversation.js
