@@ -4,10 +4,12 @@ A CLI tool for managing [Claude Code](https://docs.anthropic.com/en/docs/claude-
 
 ## ✨ Features
 
-- 📦 **One-command install** — `claude-hooks --install <module>` copies files, installs deps, wires up hooks and MCP servers
-- 🗑️ **Clean uninstall** — `claude-hooks --uninstall <module>` removes hooks from settings while preserving your data
+- 📦 **One-command install** — `chx --install <module>` copies files, installs deps, wires up hooks and MCP servers
+- 🗑️ **Clean uninstall** — `chx --uninstall <module>` removes hooks from settings while preserving your data
 - 🔌 **Modular architecture** — each module is self-contained with its own hooks, MCP servers, and settings
-- 🔄 **Self-updating** — `claude-hooks --update` pulls the latest from git
+- 🔄 **Self-updating** — `chx --update` pulls the latest from git
+- 🔀 **Model redirect** — `chx --redirect` points Claude Code at a different endpoint via `.env` (with `.gitignore` protection)
+- 🚀 **Quick launch** — `chx --run` loads `.env` and starts Claude Code with `--dangerously-skip-permissions`
 
 ## 📋 Requirements
 
@@ -21,15 +23,15 @@ A CLI tool for managing [Claude Code](https://docs.anthropic.com/en/docs/claude-
 git clone <repo-url> claude-hooks
 cd claude-hooks
 
-# Link the CLI globally
+# Link the CLI globally (installs both `chx` and `claude-hooks` commands)
 npm link
 
 # See available modules
-claude-hooks --list
+chx --list
 
 # Navigate to your project and install a module
 cd /path/to/your/project
-claude-hooks --install conversation-memory
+chx --install conversation-memory
 
 # Restart Claude Code — hooks are now active! 🎉
 ```
@@ -37,17 +39,23 @@ claude-hooks --install conversation-memory
 ## 📖 Usage
 
 ```
-claude-hooks v0.1.0
+chx (claude-hooks) v0.1.0
 
-Usage: claude-hooks [options]
+Usage: chx [options]
 
 Options:
   --help, -h                  Show this help message
   --version, -v               Show version number
   --list, -l                  List available hook modules
-  --update                    Update claude-hooks via git pull
+  --update                    Update repo and refresh all installed modules
   --install <module-name>     Install a hook module into current project
   --uninstall <module-name>   Uninstall a hook module from current project
+  --redirect [url]            Redirect Claude Code to a different model endpoint
+                              (default: http://localhost:8000)
+      --api-token <token>       API token (default: none)
+      --model <model>           Model name (default: redirected-model)
+  --reset                     Remove redirect variables from .env
+  --run                       Load .env and start Claude Code (--dangerously-skip-permissions)
 ```
 
 ## 🧩 Available Modules
@@ -127,7 +135,10 @@ claude-hooks/
 │       ├── install.js           # --install implementation
 │       ├── uninstall.js         # --uninstall implementation
 │       ├── list.js              # --list implementation
-│       └── update.js            # --update implementation
+│       ├── update.js            # --update implementation
+│       ├── redirect.js          # --redirect implementation
+│       ├── reset.js             # --reset implementation
+│       └── run.js               # --run implementation
 ├── modules/
 │   ├── conversation-memory/     # 🧠 Long-term conversation memory
 │   │   ├── index-conversation.js
