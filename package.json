@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "CLI tool for managing Claude Code hooks",
   "bin": {
+    "chx": "./bin/claude-hooks.js",
     "claude-hooks": "./bin/claude-hooks.js"
   },
   "engines": {
