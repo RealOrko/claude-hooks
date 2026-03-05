@@ -4,6 +4,29 @@ import { z } from 'zod';
 import { embed } from './lib/embeddings.js';
 import { search, getById, getCount } from './lib/db.js';
 
+function wrapText(str, width = 120, indent = '') {
+  if (!str) return str;
+  const lines = str.split('\n');
+  const wrapped = [];
+  for (const line of lines) {
+    if (line.length <= width) {
+      wrapped.push(line);
+      continue;
+    }
+    let remaining = line;
+    let first = true;
+    while (remaining.length > width) {
+      let breakAt = remaining.lastIndexOf(' ', width);
+      if (breakAt <= 0) breakAt = width;
+      wrapped.push((first ? '' : indent) + remaining.slice(0, breakAt));
+      remaining = remaining.slice(breakAt + (remaining[breakAt] === ' ' ? 1 : 0));
+      first = false;
+    }
+    if (remaining) wrapped.push((first ? '' : indent) + remaining);
+  }
+  return wrapped.join('\n');
+}
+
 const server = new McpServer({
   name: 'memory-conversation',
   version: '1.0.0',
@@ -36,8 +59,8 @@ server.tool(
         `    Date: ${r.timestamp ?? 'unknown'}\n` +
         `    Session: ${r.session_id ?? 'unknown'}\n` +
         `    Relevance: ${score}\n` +
-        `    Summary: ${r.summary ?? 'No summary'}\n` +
-        `    Prompt: ${r.prompt_preview ?? ''}\n`
+        `    Summary: ${wrapText(r.summary ?? 'No summary', 108, '    ')}\n` +
+        `    Prompt: ${wrapText(r.prompt_preview ?? '', 109, '    ')}\n`
       );
     });
 
@@ -63,7 +86,7 @@ server.tool(
       `Date: ${record.timestamp ?? 'unknown'}\n` +
       `Session: ${record.session_id ?? 'unknown'}\n` +
       `Summary: ${record.summary ?? 'N/A'}\n\n` +
-      `--- Full Exchange ---\n${record.text}`;
+      `--- Full Exchange ---\n${wrapText(record.text)}`;
 
     return { content: [{ type: 'text', text }] };
   },
@@ -103,7 +126,7 @@ server.tool(
       lines.push(
         `--- Exchange ${(m.exchange_index ?? 0) + 1} (ID: ${m.id}, relevance: ${relevance}) ---\n` +
         `Date: ${m.timestamp ?? 'unknown'}\n` +
-        `${m.text}\n`,
+        `${wrapText(m.text)}\n`,
       );
     }
 
