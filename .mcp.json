@@ -1,24 +1,10 @@
 {
   "mcpServers": {
-    "memory-code": {
+    "vector-kv-conversation": {
       "type": "stdio",
       "command": "node",
       "args": [
-        ".claude/claude-hooks/memory-code/mcp-server.js"
-      ]
-    },
-    "memory-conversation": {
-      "type": "stdio",
-      "command": "node",
-      "args": [
-        ".claude/claude-hooks/memory-conversation/mcp-server.js"
-      ]
-    },
-    "memory-tool-call": {
-      "type": "stdio",
-      "command": "node",
-      "args": [
-        ".claude/claude-hooks/memory-tool-call/mcp-server.js"
+        ".claude/claude-hooks/vector-kv-conversation/mcp-server.js"
       ]
     }
   }
