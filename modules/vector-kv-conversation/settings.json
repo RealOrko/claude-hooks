@@ -1,0 +1,35 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/vector-kv-conversation/suggest-context.js",
+            "timeout": 60,
+            "statusMessage": "Searching conversation memory"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/claude-hooks/vector-kv-conversation/index-conversation.js",
+            "timeout": 60,
+            "statusMessage": "Indexing conversation to memory"
+          }
+        ]
+      }
+    ]
+  },
+  "mcpServers": {
+    "vector-kv-conversation": {
+      "type": "stdio",
+      "command": "node",
+      "args": [".claude/claude-hooks/vector-kv-conversation/mcp-server.js"]
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "Version": "1.0.0",
+  "Name": "vector-kv-conversation",
+  "Description": "Stores and searches Claude conversation history using vector-kv as the backend"
+}
